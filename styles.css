@@ -1,0 +1,228 @@
+
+:root{
+  --bg:#ffffff;
+  --surface:#fdfbf6;
+  --ink:#31281c;
+  --ink-soft:#7a6f5c;
+  --line:rgba(49,40,28,0.08);
+
+  /* Cores de categoria — adicione uma nova variável
+     para cada categoria futura (ex: --c-legumes) */
+  --c-alface:#7c9473;
+  --c-ervas:#c98a2c;
+  --c-folhosas:#557a49;
+  --c-brocolis:#3f8a76;
+  --c-frutas:#c65b4e;
+}
+
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  padding:48px 20px;
+  font-family:'Inter',system-ui,sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+}
+
+.sheet{
+  max-width:820px;
+  margin:0 auto;
+}
+
+/* ---------- HEADER ---------- */
+.letterhead{
+  text-align:center;
+  padding:8px 20px 36px;
+}
+
+.logo{
+  width:140px;
+  height:auto;
+  margin:0 auto;
+  display:block;
+  filter:drop-shadow(0 6px 10px rgba(49,40,28,0.12));
+}
+.brand-fallback{
+  display:none;
+  margin:0;
+  font-family:'Quicksand',sans-serif;
+  font-weight:700;
+  font-size:2.1rem;
+  color:var(--ink);
+}
+
+.tagline{
+  margin:6px 0 0;
+  font-size:0.92rem;
+  color:var(--ink-soft);
+  font-weight:500;
+}
+
+/* ---------- CATEGORY SECTION ---------- */
+.category-block{
+  margin-bottom:34px;
+}
+
+.category-head{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:14px;
+  padding-left:2px;
+}
+.category-dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  flex:none;
+}
+.category-head h2{
+  margin:0;
+  font-family:'Quicksand',sans-serif;
+  font-weight:700;
+  font-size:1.08rem;
+  color:var(--ink);
+}
+.category-head .count{
+  margin-left:auto;
+  font-size:0.78rem;
+  color:var(--ink-soft);
+  font-weight:500;
+}
+
+/* ---------- ITEM GRID ---------- */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(170px, 1fr));
+  gap:10px;
+}
+
+.item-card{
+  background:var(--surface);
+  border-radius:14px;
+  padding:14px 16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  box-shadow:0 1px 3px rgba(49,40,28,0.06);
+  border:1px solid var(--line);
+  transition:box-shadow .15s ease;
+}
+
+.item-name{
+  font-size:0.94rem;
+  font-weight:500;
+  color:var(--ink);
+  line-height:1.25;
+}
+
+.item-code{
+  flex:none;
+  font-family:'Space Mono',monospace;
+  font-weight:700;
+  font-size:0.95rem;
+  padding:6px 11px;
+  border-radius:8px;
+  color:var(--surface);
+  white-space:nowrap;
+  letter-spacing:0.02em;
+}
+
+/* Aplicação das cores de categoria.
+   Para uma categoria nova, adicione:
+   .cat-nome .category-dot, .cat-nome .item-code{background:var(--c-nome);} */
+.cat-alface .category-dot, .cat-alface .item-code{background:var(--c-alface);}
+.cat-ervas .category-dot, .cat-ervas .item-code{background:var(--c-ervas);}
+.cat-folhosas .category-dot, .cat-folhosas .item-code{background:var(--c-folhosas);}
+.cat-brocolis .category-dot, .cat-brocolis .item-code{background:var(--c-brocolis);}
+.cat-frutas .category-dot, .cat-frutas .item-code{background:var(--c-frutas);}
+
+/* ---------- FOOTER ---------- */
+.footer{
+  text-align:center;
+  padding:20px 20px 4px;
+  border-top:1px solid var(--line);
+  margin-top:18px;
+}
+.footer p{
+  margin:16px 0 0;
+  font-size:0.78rem;
+  color:var(--ink-soft);
+  font-weight:500;
+}
+.footer .next{
+  color:var(--c-alface);
+}
+
+@media (max-width:480px){
+  .grid{grid-template-columns:repeat(auto-fill, minmax(140px, 1fr));}
+  .brand-fallback{font-size:1.7rem;}
+}
+
+@media print{
+  @page{
+    size:A4;
+    margin:12mm;
+  }
+
+  html, body{height:100%;}
+
+  body{
+    background:#fff;
+    padding:0;
+    font-size:13px;
+  }
+
+  .sheet{
+    max-width:100%;
+    min-height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+
+  .letterhead{padding:0 0 6px;}
+  .logo{width:100px; filter:none;}
+  .tagline{margin-top:4px; font-size:0.8rem;}
+
+  .category-block{
+    margin-bottom:0;
+    page-break-inside:avoid;
+    break-inside:avoid;
+  }
+  .category-head{margin-bottom:8px;}
+  .category-head h2{font-size:0.95rem;}
+  .category-head .count{font-size:0.7rem;}
+
+  .grid{
+    grid-template-columns:repeat(auto-fill, minmax(160px, 1fr));
+    gap:8px;
+  }
+
+  .item-card{
+    padding:9px 12px;
+    box-shadow:none;
+    border:1px solid #999;
+    page-break-inside:avoid;
+    break-inside:avoid;
+  }
+  .item-name{font-size:0.85rem;}
+
+  .item-code{
+    background:transparent !important;
+    color:#000 !important;
+    border:2px solid #000;
+    font-weight:700;
+    font-size:0.82rem;
+    padding:4px 8px;
+  }
+  .category-dot{background:#000 !important;}
+
+  .footer{
+    margin-top:6px;
+    padding:8px 0 0;
+  }
+  .footer p{margin-top:5px; font-size:0.7rem;}
+}
